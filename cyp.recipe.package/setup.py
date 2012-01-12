@@ -14,11 +14,6 @@ version = '0.1'
 long_description = (
     read('README.txt')
     + '\n' +
-    'Detailed Documentation\n'
-    '**********************\n'
-    + '\n' +
-    read('cyp', 'recipe', 'package', 'README.txt')
-    + '\n' +
     'Contributors\n'
     '************\n'
     + '\n' +
