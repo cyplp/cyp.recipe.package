@@ -30,8 +30,20 @@ class Recipe(object):
 
     def install(self):
         """Installer"""
-        # XXX Implement recipe functionality here
+        self._install()
 
+        return tuple()
+
+    def update(self):
+        """Updater"""
+        if 'on_update' in self.options:
+            if self.options['on_update'].lower() == 'true':
+                self._install()
+
+    def _install(self):
+        """
+        Install action.
+        """
         sudo = self._getSudo()
 
         installer = self._getInstaller()
@@ -46,18 +58,9 @@ class Recipe(object):
         args.extend([installer])
         args.extend(installOptions)
         args.extend(packages)
-        print args
-        subprocess.call(args,
-                        stdin=subprocess.PIPE,
-                        stderr=subprocess.STDOUT,
-                        shell=True)
-        # Return files that were created by the recipe. The buildout
-        # will remove all returned files upon reinstall.
-        return tuple()
 
-    def update(self):
-        """Updater"""
-        pass
+        subprocess.call(args)
+
 
     def _getInstaller(self):
         """
